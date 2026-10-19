@@ -222,6 +222,7 @@
         <a href="{{ route('absensi.rekap') }}" class="{{ request()->routeIs('absensi.rekap') ? 'active':'' }}"><i class="bi bi-bar-chart-fill"></i> Rekap Absensi</a>
         <a href="{{ route('penempatan.index') }}" class="{{ request()->routeIs('penempatan*') ? 'active':'' }}"><i class="bi bi-geo-alt-fill"></i> Penempatan GT</a>
         <a href="{{ route('biodata.rekap') }}" class="{{ request()->routeIs('biodata.rekap', 'biodata.show') ? 'active':'' }}"><i class="bi bi-people-fill"></i> Data Bio</a>
+        <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users*') ? 'active':'' }}"><i class="bi bi-person-gear"></i> Kelola Akun</a>
         <a href="{{ route('setting.index') }}" class="{{ request()->routeIs('setting*') ? 'active':'' }}"><i class="bi bi-gear-fill"></i> Pengaturan</a>
         <a href="{{ route('pengaduan.index') }}" class="{{ request()->routeIs('pengaduan*') ? 'active':'' }}"><i class="bi bi-flag-fill"></i> Pengaduan</a>
         <a href="{{ route('layanan.index') }}" class="{{ request()->routeIs('layanan*') ? 'active':'' }}"><i class="bi bi-headset"></i> Layanan — Saran</a>
@@ -314,9 +315,7 @@
     </div>
 
     <div class="footer">
-        <span class="arab">© 1448 TMTB KIK • PP KUNUUZUL IMAM KAUMAN • Kauman 68213</span>
- <span class="d-none d-md-inline small" style="color:var(--gold)">Heritage Kuning</span>
-        <span class="d-md-none small" style="color:var(--gold);opacity:0.85">Heritage • 1448H</span>
+        <span class="arab">© 1448 TMTB KIK • PP KUNUUZUL IMAM KAUMAN</span>
     </div>
 </div>
 

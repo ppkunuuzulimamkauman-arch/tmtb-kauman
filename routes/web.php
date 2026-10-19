@@ -12,6 +12,7 @@ use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PjgtLaporanController;
 use App\Http\Controllers\PjgtGtController;
+use App\Http\Controllers\UserController;
 use App\Models\Permohonan;
 use Illuminate\Support\Facades\Route;
 
@@ -101,6 +102,18 @@ Route::middleware('auth')->group(function () {
     Route::put('/biodata-rekap/{user}', [GtController::class, 'updateBiodataAdmin'])->name('biodata.update')->middleware('role:admin');
     Route::delete('/biodata-rekap/{user}', [GtController::class, 'destroyUser'])->name('biodata.destroy')->middleware('role:admin');
     Route::get('/biodata-rekap/{user}', [GtController::class, 'showBiodata'])->name('biodata.show')->middleware('role:admin');
+
+    // Kelola Akun GT/PJGT — Admin buat/edit/reset kata sandi + hapus akun
+    Route::prefix('kelola-akun')->name('users.')->middleware('role:admin')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::get('/{user}/reset-password', [UserController::class, 'resetForm'])->name('reset');
+        Route::put('/{user}/reset-password', [UserController::class, 'reset'])->name('reset.update');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
+        Route::put('/{user}', [UserController::class, 'update'])->name('update');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
+    });
 
     // Penempatan GT ke Lembaga — Admin tempatkan/pindahkan/lepas + ekspor untuk dicetak
     Route::get('/penempatan', [PenempatanController::class, 'index'])->name('penempatan.index')->middleware('role:admin');
