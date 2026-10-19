@@ -287,10 +287,12 @@
               <td><div style="color:var(--green);font-weight:700">{{ $p->pjgt_nama }}</div><div style="color:#5d4037;font-size:11px">{{ $p->nama_madrasah }} • {{ $p->tahun }}</div></td>
               <td><span class="badge" style="background:var(--cream2);color:var(--green);border:1px solid var(--gold)">{{ $p->wil }}</span></td>
               <td><span class="badge" style="background:{{$p->rapot=='A'?'#0a3d1f':($p->rapot=='B'?'#d4af37':'#8a7a3a')}};color:#fff">{{ $p->rapot }}</span></td>
-              <td class="d-flex gap-1">
+              <td>
+                <div class="d-flex gap-1">
                 <a href="{{ route('permohonan.show',$p) }}" class="btn btn-sm" style="background:var(--cream);border:1px solid var(--gold);color:var(--green);border-radius:20px;font-size:11px">Detail</a>
                 <form method="POST" action="{{ route('permohonan.approve',$p) }}" class="d-inline">@csrf<button name="status" value="Diterima" class="btn btn-sm" style="background:#198754;color:#fff;border-radius:20px;font-size:11px" onclick="return confirm('Setujui {{ $p->pjgt_id }}?')">✓</button></form>
                 <form method="POST" action="{{ route('permohonan.approve',$p) }}" class="d-inline">@csrf<button name="status" value="Ditolak" class="btn btn-sm" style="background:#dc3545;color:#fff;border-radius:20px;font-size:11px" onclick="return confirm('Tolak {{ $p->pjgt_id }}?')">✕</button></form>
+                </div>
               </td>
             </tr>
             @empty

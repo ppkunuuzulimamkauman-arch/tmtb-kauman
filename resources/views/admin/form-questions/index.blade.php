@@ -24,9 +24,11 @@
           <td><span class="badge" style="background:var(--cream2);color:var(--green);border:1px solid var(--gold)">{{ $q->field_type }}</span></td>
           <td>@if($q->is_required)<span class="badge" style="background:#dc3545;color:#fff">wajib</span>@else<span class="badge" style="background:#6c757d;color:#fff">opsional</span>@endif</td>
           <td>@if($q->is_active)<span class="badge" style="background:#198754;color:#fff">aktif</span>@else<span class="badge" style="background:#6c757d;color:#fff">mati</span>@endif</td>
-          <td class="d-flex gap-1">
+          <td>
+            <div class="d-flex gap-1">
             <a href="{{ route('form-questions.edit',$q) }}" class="btn btn-sm" style="background:var(--cream);border:1px solid var(--gold);color:var(--green);border-radius:20px">Edit</a>
             <form method="POST" action="{{ route('form-questions.destroy',$q) }}" onsubmit="return confirm('Hapus?')">@csrf @method('DELETE')<button class="btn btn-sm" style="background:#ffe9e9;border:1px solid #ffb3b3;color:#7a0a0a;border-radius:20px">Hapus</button></form>
+            </div>
           </td>
         </tr>
         @empty
