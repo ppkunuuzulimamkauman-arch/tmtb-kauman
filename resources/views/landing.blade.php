@@ -151,9 +151,12 @@ section[id]:target{animation:sectFlash 1.4s ease}
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="nav">
     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 pt-3 pt-lg-0">
+      <li class="nav-item"><a class="nav-link fw-semibold" href="#statistik" style="color:var(--green)"><i class="bi bi-graph-up d-lg-none me-2" style="color:var(--gold2)"></i>Statistik</a></li>
       <li class="nav-item"><a class="nav-link fw-semibold" href="#alur" style="color:var(--green)"><i class="bi bi-signpost-2 d-lg-none me-2" style="color:var(--gold2)"></i>Alur</a></li>
       @auth
         <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a href="{{ route('dashboard') }}" class="btn-heritage w-100 w-lg-auto justify-content-center"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+      @else
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a href="{{ route('login') }}" class="btn-heritage w-100 w-lg-auto justify-content-center"><i class="bi bi-box-arrow-in-right"></i> Masuk</a></li>
       @endauth
     </ul>
   </div>

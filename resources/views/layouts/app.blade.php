@@ -287,7 +287,13 @@
             @else
             <span class="badge-pendaftaran d-none d-md-inline">{{ \App\Models\Setting::tahunAjaran() }} H</span>
             @endif
+            @if((auth()->user()->role ?? '') === 'pjgt')
+            <a href="{{ route('pjgt.biodata') }}" class="small text-decoration-none d-none d-md-inline" style="color:var(--green);font-weight:700"><i class="bi bi-person-vcard"></i> Profil</a>
+            @elseif((auth()->user()->role ?? '') === 'gt')
+            <a href="{{ route('gt.biodata') }}" class="small text-decoration-none d-none d-md-inline" style="color:var(--green);font-weight:700"><i class="bi bi-person-badge"></i> Profil</a>
+            @else
             <a href="{{ route('landing') }}" class="small text-decoration-none d-none d-md-inline" style="color:var(--green);font-weight:700"><i class="bi bi-house"></i> Beranda</a>
+            @endif
             <div class="dropdown d-flex align-items-center gap-2">
                 <a href="#" data-bs-toggle="dropdown" class="d-flex align-items-center gap-2 text-decoration-none" style="min-height:40px">
                     <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name ?? 'User') }}&background=0a3d1f&color=d4af37&size=80" class="rounded-circle" width="34" height="34" style="border:2px solid var(--gold);object-fit:cover">
@@ -296,7 +302,13 @@
                 <ul class="dropdown-menu dropdown-menu-end" style="border:2px solid var(--gold);border-radius:14px;overflow:hidden;min-width:220px">
                     <li><span class="dropdown-item small" style="color:var(--green);white-space:normal;word-break:break-all">{{ auth()->user()->email ?? '' }}<br><span class="text-muted" style="font-size:11px">{{ auth()->user()->username ?? '' }} • {{ strtoupper(auth()->user()->role ?? '') }}</span></span></li>
                     <li><hr class="dropdown-divider"></li>
+                    @if((auth()->user()->role ?? '') === 'pjgt')
+                    <li><a class="dropdown-item small" href="{{ route('pjgt.biodata') }}" style="color:var(--green)"><i class="bi bi-person-vcard"></i> Profil Saya</a></li>
+                    @elseif((auth()->user()->role ?? '') === 'gt')
+                    <li><a class="dropdown-item small" href="{{ route('gt.biodata') }}" style="color:var(--green)"><i class="bi bi-person-badge"></i> Profil Saya</a></li>
+                    @else
                     <li><a class="dropdown-item small" href="{{ route('landing') }}" style="color:var(--green)"><i class="bi bi-house"></i> Beranda Landing</a></li>
+                    @endif
                     <li><a class="dropdown-item small" href="{{ route('password.edit') }}" style="color:var(--green)"><i class="bi bi-key"></i> Ganti Password</a></li>
                     <li><form method="POST" action="{{ route('logout') }}">@csrf<button class="dropdown-item small" style="color:#dc3545"><i class="bi bi-box-arrow-right"></i> Keluar</button></form></li>
                 </ul>
@@ -341,10 +353,10 @@
         <i class="bi bi-globe2"></i>
         <span>Beranda</span>
     </a>
-    @else
+    @elseif((auth()->user()->role ?? '') === 'gt')
     <a href="{{ route('gt.biodata') }}" class="{{ request()->routeIs('gt.biodata') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('gt.biodata') ? 'bi-person-badge-fill' : 'bi-person-badge' }}"></i>
-        <span>Biodata</span>
+        <span>Profil</span>
     </a>
     <a href="{{ route('gt.absensi.mengajar') }}" class="{{ request()->routeIs('gt.absensi.*') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('gt.absensi.*') ? 'bi-fingerprint' : 'bi-fingerprint' }}"></i>
