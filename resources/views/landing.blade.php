@@ -118,7 +118,6 @@ section[id]:target{animation:sectFlash 1.4s ease}
   .stat-heritage .h4{font-size:20px}
   .feature-heritage{padding:16px}
   #statistik{padding-top:16px !important;margin-top:0 !important}
-  #informasi{padding-top:28px !important;padding-bottom:28px !important}
   #alur{padding-top:28px !important;padding-bottom:calc(28px + 76px) !important}
   .mobile-sticky-cta{display:flex;gap:10px}
   .footer-heritage{padding-bottom:calc(18px + env(safe-area-inset-bottom)) !important;margin-bottom:0 !important}
@@ -148,8 +147,6 @@ section[id]:target{animation:sectFlash 1.4s ease}
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="nav">
     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 pt-3 pt-lg-0">
-      <li class="nav-item"><a class="nav-link fw-semibold" href="#statistik" style="color:var(--green)"><i class="bi bi-bar-chart d-lg-none me-2" style="color:var(--gold2)"></i>Statistik</a></li>
-      <li class="nav-item"><a class="nav-link fw-semibold" href="#informasi" style="color:var(--green)"><i class="bi bi-info-circle d-lg-none me-2" style="color:var(--gold2)"></i>Informasi</a></li>
       <li class="nav-item"><a class="nav-link fw-semibold" href="#alur" style="color:var(--green)"><i class="bi bi-signpost-2 d-lg-none me-2" style="color:var(--gold2)"></i>Alur</a></li>
       @auth
         <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a href="{{ route('dashboard') }}" class="btn-heritage w-100 w-lg-auto justify-content-center"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
@@ -252,86 +249,7 @@ section[id]:target{animation:sectFlash 1.4s ease}
 </div>
 </section>
 
-<section id="informasi" class="py-5" style="background:#fff;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold)">
-<div class="container">
-<div class="text-center mb-4 px-2">
-  <span class="sect-eyebrow">Kabar Terkini</span>
-  <h2 class="fw-bold mt-2" style="color:var(--green);font-size:clamp(22px,6vw,32px)">Informasi & Pengumuman</h2>
-  <p style="color:var(--brown);max-width:640px;margin:0 auto;font-size:clamp(13px,3.5vw,15px)">Update resmi seputar pendaftaran TMTB, jadwal verifikasi, dan pengumuman dari PP Kunuuzul Imam Kauman.</p>
-</div>
-<div class="row g-3">
-  {{-- Dinamis dari Kelola Landing (admin) — fallback ke 3 kartu bawaan jika kosong --}}
-  @if(isset($landingInfos) && $landingInfos->count())
-    @foreach($landingInfos as $i => $info)
-    @php
-      $sec = strtolower($info->section);
-      $badgeStyle = $sec==='pengumuman' ? 'background:var(--gold);color:var(--green);border:1px solid var(--green)' : ($sec==='panduan' ? 'background:#fff;border:1px solid var(--gold);color:var(--green)' : 'background:var(--green);color:var(--gold);border:1px solid var(--gold)');
-      $borderColor = $sec==='pengumuman' ? 'var(--green)' : ($sec==='panduan' ? '#b8941f' : 'var(--gold)');
-      $icon = $sec==='pengumuman' ? 'bi-clipboard2-check-fill' : ($sec==='panduan' ? 'bi-journals' : 'bi-megaphone-fill');
-      $delay = $i===1 ? 'delay-1' : ($i>=2 ? 'delay-2' : '');
-    @endphp
-    <div class="col-md-4">
-      <div class="feature-heritage h-100 d-flex flex-column reveal {{ $delay }}" style="border-left:4px solid {{ $borderColor }}">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <span class="badge" style="{{ $badgeStyle }};font-size:10px">{{ strtoupper($info->category ?: $info->section) }}</span>
-          @if($info->date_label)<span class="small" style="color:#8a7a3a"><i class="bi bi-calendar3"></i> {{ $info->date_label }}</span>@endif
-        </div>
-        <div style="width:54px;height:54px;background:var(--cream2);border:2px solid var(--gold);color:var(--green);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px"><i class="bi {{ $icon }}"></i></div>
-        <h5 class="fw-bold mt-3" style="color:var(--green)">{{ $info->title }}</h5>
-        @if($info->subtitle)<div class="small fw-bold" style="color:var(--gold2)">{{ $info->subtitle }}</div>@endif
-        @if($info->content)<p class="small flex-grow-1" style="color:var(--brown)">{{ $info->content }}</p>@endif
-        @if($info->link_text)<a href="{{ $info->link_url ?: '#' }}" class="small fw-bold mt-2" style="color:var(--gold2);text-decoration:none">{{ $info->link_text }} <i class="bi bi-arrow-right"></i></a>@endif
-      </div>
-    </div>
-    @endforeach
-  @else
-  <!-- Info 1 -->
-  <div class="col-md-4">
-    <div class="feature-heritage h-100 d-flex flex-column reveal" style="border-left:4px solid var(--gold)">
-      <div class="d-flex align-items-center gap-2 mb-2">
-        <span class="badge" style="background:var(--green);color:var(--gold);border:1px solid var(--gold);font-size:10px">INFORMASI</span>
-        <span class="small" style="color:#8a7a3a"><i class="bi bi-calendar3"></i> 10 Sep 2026</span>
-      </div>
-      <div style="width:54px;height:54px;background:var(--cream2);border:2px solid var(--gold);color:var(--green);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px"><i class="bi bi-megaphone-fill"></i></div>
-      <h5 class="fw-bold mt-3" style="color:var(--green)">Pendaftaran TMTB 1448/1449 H Dibuka</h5>
-      <p class="small flex-grow-1" style="color:var(--brown)">Gelombang 1 dibuka <strong>10 Sep – 30 Nov 2026</strong> untuk seluruh lembaga mitra. Lengkapi Formulir 4 Tahap dan upload berkas sebelum batas akhir.</p>
-      <a href="{{ route('register') }}" class="small fw-bold mt-2" style="color:var(--gold2);text-decoration:none">Daftar Sekarang <i class="bi bi-arrow-right"></i></a>
-    </div>
-  </div>
-  <!-- Info 2 -->
-  <div class="col-md-4">
-    <div class="feature-heritage h-100 d-flex flex-column reveal delay-1" style="border-left:4px solid var(--green)">
-      <div class="d-flex align-items-center gap-2 mb-2">
-        <span class="badge" style="background:var(--gold);color:var(--green);border:1px solid var(--green);font-size:10px">PENGUMUMAN</span>
-        <span class="small" style="color:#8a7a3a"><i class="bi bi-calendar3"></i> 05 Sep 2026</span>
-      </div>
-      <div style="width:54px;height:54px;background:var(--green);color:var(--gold);border:2px solid var(--gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px"><i class="bi bi-clipboard2-check-fill"></i></div>
-      <h5 class="fw-bold mt-3" style="color:var(--green)">Jadwal Verifikasi & Distribusi GT</h5>
-      <p class="small flex-grow-1" style="color:var(--brown)">Verifikasi berkas oleh Majelis KIK <strong>1–15 Des 2026</strong>. Pengumuman hasil dan distribusi Guru Tugas mulai Januari 2027.</p>
-      <a href="#alur" class="small fw-bold mt-2" style="color:var(--gold2);text-decoration:none">Lihat Alur <i class="bi bi-arrow-right"></i></a>
-    </div>
-  </div>
-  <!-- Info 3 -->
-  <div class="col-md-4">
-    <div class="feature-heritage h-100 d-flex flex-column reveal delay-2" style="border-left:4px solid #b8941f">
-      <div class="d-flex align-items-center gap-2 mb-2">
-        <span class="badge" style="background:#fff;border:1px solid var(--gold);color:var(--green);font-size:10px">PANDUAN</span>
-        <span class="small" style="color:#8a7a3a"><i class="bi bi-calendar3"></i> 01 Sep 2026</span>
-      </div>
-      <div style="width:54px;height:54px;background:#fff;border:2px solid var(--gold);color:var(--gold2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px"><i class="bi bi-journals"></i></div>
-      <h5 class="fw-bold mt-3" style="color:var(--green)">Panduan Pengisian Formulir 4 Tahap</h5>
-      <p class="small flex-grow-1" style="color:var(--brown)">Identitas → Pengelola → Kondisi → Santri. Wajib isi nama pesantren (isi 0 jika tidak ada) dan WA aktif untuk tabayyun.</p>
-      <a href="#alur" class="small fw-bold mt-2" style="color:var(--gold2);text-decoration:none">Buka Panduan <i class="bi bi-arrow-right"></i></a>
-    </div>
-  </div>
-  @endif
-</div>
-<div class="text-center mt-4">
-  <a href="#" class="btn-heritage px-4 py-2 d-inline-flex" style="font-size:13px;width:auto"><i class="bi bi-newspaper"></i> Lihat Semua Informasi</a>
-  <div class="small mt-2" style="color:#8a7a3a">Kategori: <span class="badge" style="background:var(--cream2);border:1px solid var(--gold);color:var(--green)">Informasi</span> <span class="badge" style="background:var(--cream2);border:1px solid var(--gold);color:var(--green)">Pengumuman</span> <span class="badge" style="background:var(--cream2);border:1px solid var(--gold);color:var(--green)">Panduan</span></div>
-</div>
-</div>
-</section>
+
 
 <section id="alur" class="py-5" style="background:var(--cream)">
 <div class="container">
@@ -379,8 +297,7 @@ section[id]:target{animation:sectFlash 1.4s ease}
     <div class="small" style="color:var(--cream);opacity:0.9">Jln KH Zainul Arifin No.165, Kauman, Bondowoso - Jawa Timur 68213<br>Pendaftaran TMTB • Resmi • Terverifikasi • © 1448 H</div>
   </div>
   <div class="col-md-5 text-md-end small" style="color:var(--cream);opacity:0.8">
-    <a class="footer-link" href="#informasi"><i class="bi bi-chevron-right"></i> Informasi</a>
-    <a class="footer-link ms-3" href="#alur"><i class="bi bi-chevron-right"></i> Alur</a>
+    <a class="footer-link" href="#alur"><i class="bi bi-chevron-right"></i> Alur</a>
     <a class="footer-link ms-3" href="#statistik"><i class="bi bi-chevron-right"></i> Statistik</a><br>
     <span class="d-none d-md-inline">Pondok Pesantren • Madrasah Diniyah • Majelis Taklim</span>
   </div>
@@ -479,9 +396,8 @@ const revealObs=new IntersectionObserver(entries=>{
 },{threshold:.15, rootMargin:'0px 0px -40px 0px'});
 revealEls.forEach(el=> revealObs.observe(el));
 // ── NAVBAR SCROLL SPY ──
-const sections=['statistik','informasi','alur']; const navLinks=document.querySelectorAll('.navbar-nav .nav-link[href^="#"]');
-window.addEventListener('scroll', ()=>{
-  // pilih seksi yang posisi atasnya paling dekat DI BAWAH posisi scroll (urutan DOM bebas)
+const sections=['statistik','alur']; const navLinks=document.querySelectorAll('.navbar-nav .nav-link[href^="#"]');
+window.addEventListener('scroll',()=>{
   let current='', bestTop=-Infinity;
   sections.forEach(id=>{
     const sec=document.getElementById(id);
