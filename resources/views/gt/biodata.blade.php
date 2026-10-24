@@ -3,14 +3,15 @@
 @section('breadcrumb','Biodata')
 @push('styles')
 <style>
-  .bio-label{font-size:12px;color:#333;margin-bottom:4px}
+  .bio-label{font-size:12px;color:#5d4037;font-weight:700;margin-bottom:4px}
   .bio-label .req{color:#dc3545}
-  .bio-input{background:#f1f1f1 !important;border:1px solid transparent !important;font-size:12px;color:#555}
+  .bio-input{background:#f9f6ea !important;border:1.5px solid transparent !important;font-size:13px;color:#5d4037;border-radius:10px}
   .bio-input:not(:disabled){background:#fff !important;border-color:#e8d9a0 !important;color:#1a1a1a}
-  .bio-input:not(:disabled):focus{border-color:var(--gold) !important;box-shadow:0 0 0 3px rgba(212,175,55,.18)}
-  .bio-tabs .nav-link{font-size:12px;color:#333;background:#f1f1f1;border-radius:6px 6px 0 0;transition:background-color .25s,color .25s}
+  .bio-input:not(:disabled):focus{border-color:#d4af37 !important;box-shadow:0 0 0 3px rgba(212,175,55,.18)}
+  .bio-tabs .nav-link{font-size:13px;color:#5d4037;background:#fdf6e3;border-radius:10px 10px 0 0;font-weight:600;border:1px solid transparent}
   .bio-tabs .nav-link:hover{background:#e6f4ea;color:#0a4d26}
-  .bio-tabs .nav-link.active{background:#fff;color:#0a3d1f !important;font-weight:700;border-color:#dee2e6 #dee2e6 #fff}
+  .bio-tabs .nav-link.active{background:#0a3d1f;color:#d4af37 !important;font-weight:800;border-color:#d4af37 #d4af37 #0a3d1f}
+  .bio-card{border:2px solid #d4af37;border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(10,61,31,.08);background:#fff}
 </style>
 @endpush
 @section('content')
@@ -19,28 +20,33 @@
     ? asset('storage/'.$biodata->foto_path)
     : 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&background=d4af37&color=0a3d1f&size=200';
 @endphp
-<div class="card" style="border:none;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08)">
-  <div class="p-3 d-flex justify-content-between align-items-center flex-wrap gap-2" style="border-bottom:1px solid #eee">
-    <span style="color:#2b3a67;font-size:15px">Biodata Guru Tugas</span>
-    <button type="button" id="btnEdit" class="btn btn-sm fw-bold" style="background:#f5a623;color:#fff;border-radius:5px;font-size:11px"><i class="bi bi-pencil-square"></i> Edit Biodata</button>
+
+<div class="bio-card mb-3">
+  <div style="height:100px;background:linear-gradient(135deg,#0a3d1f 0%,#1d7a3d 100%);position:relative">
+    <div style="position:absolute;inset:0;opacity:.1;background-image:url(&quot;data:image/svg+xml,%3Csvg width=&apos;60&apos; height=&apos;60&apos; viewBox=&apos;0 0 60 60&apos; xmlns=&apos;http://www.w3.org/2000/svg&apos;%3E%3Cg fill=&apos;none&apos; fill-rule=&apos;evenodd&apos;%3E%3Cg fill=&apos;%23d4af37&apos; fill-opacity=&apos;0.4&apos;%3E%3Cpath d=&apos;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&apos;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;)"></div>
+  </div>
+  <div class="px-3 pt-3 pb-3" style="margin-top:-40px;position:relative;z-index:1">
+    <div class="d-flex align-items-end gap-3 mb-3">
+      <img id="fotoPreview" src="{{ $fotoUrl }}" alt="Foto profil" style="width:80px;height:80px;border-radius:16px;object-fit:cover;border:3px solid var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.15)">
+      <div class="flex-fill pb-1">
+        <div class="fw-bold" style="color:#0a3d1f;font-size:18px">{{ $user->name }}</div>
+        <div class="small" style="color:#8a7a3a">{{ $user->username }} • GURU TUGAS</div>
+      </div>
+      <button type="button" id="btnEdit" class="btn btn-sm fw-bold flex-shrink-0" style="background:#0a3d1f;color:#d4af37;border-radius:50px;padding:8px 16px;border:1.5px solid #d4af37"><i class="bi bi-pencil-square"></i> Edit</button>
+    </div>
+  </div>
+</div>
+
+<div class="bio-card">
+  <div class="p-3 d-flex justify-content-between align-items-center" style="background:linear-gradient(135deg,#fffdf0,#fdf6e3);border-bottom:2px solid #d4af37">
+    <span class="fw-bold" style="color:#0a3d1f;font-size:14px"><i class="bi bi-person-vcard-fill" style="color:#d4af37"></i> Biodata Guru Tugas</span>
   </div>
 
   <div class="p-3">
-    {{-- Foto profil --}}
-    <div class="d-flex gap-3 align-items-center flex-wrap mb-3 p-3 rounded-3" style="background:#faf8f0;border:1px solid #eee">
-      <img id="fotoPreview" src="{{ $fotoUrl }}" alt="Foto profil" style="width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.15)">
-      <div class="flex-fill" style="min-width:200px">
-        <div class="fw-bold" style="color:#0a3d1f;font-size:17px">{{ $user->name }}</div>
-        <div class="small" style="color:#777">{{ $user->username }} • GURU TUGAS</div>
-        <div class="small mt-1" style="color:#999;font-size:11px">Foto tampil di biodata. Ganti lewat mode edit (JPG/PNG, maks 2MB).</div>
-      </div>
-    </div>
-
     <form method="POST" action="{{ route('gt.biodata.update') }}" enctype="multipart/form-data" id="bioForm">
       @csrf @method('PUT')
 
-      {{-- Ringkasan atas ala referensi --}}
-      <div class="row g-3 mb-1">
+      <div class="row g-3 mb-2">
         <div class="col-12 col-md-6">
           <label class="bio-label">Nama Guru Tugas <span class="req">*</span></label>
           <input type="text" name="name" value="{{ old('name', $user->name) }}" class="form-control form-control-sm bio-input" disabled required>
@@ -59,7 +65,6 @@
         </div>
       </div>
 
-      {{-- Upload foto (hanya mode edit) --}}
       <div class="mb-2 d-none" id="fotoRow">
         <label class="bio-label">Foto Profil</label>
         <input type="file" name="foto" id="fotoInput" accept="image/*" class="form-control form-control-sm">
@@ -72,7 +77,6 @@
       </ul>
 
       <div class="tab-content py-3">
-        {{-- TAB 1 --}}
         <div class="tab-pane fade show active" id="tab-diri" role="tabpanel">
           <div class="row g-3">
             <div class="col-12 col-md-6"><label class="bio-label">NISN</label><input type="text" name="nisn" value="{{ old('nisn', $biodata->nisn) }}" class="form-control form-control-sm bio-input" disabled></div>
@@ -108,7 +112,6 @@
           </div>
         </div>
 
-        {{-- TAB 2 --}}
         <div class="tab-pane fade" id="tab-ortu" role="tabpanel">
           <div class="row g-3">
             <div class="col-12 col-md-6"><label class="bio-label">NIK Ayah</label><input type="text" name="nik_ayah" value="{{ old('nik_ayah', $biodata->nik_ayah) }}" class="form-control form-control-sm bio-input" disabled></div>
@@ -118,7 +121,7 @@
             <div class="col-12 col-md-6"><label class="bio-label">Pekerjaan Ayah</label><input type="text" name="pekerjaan_ayah" value="{{ old('pekerjaan_ayah', $biodata->pekerjaan_ayah) }}" class="form-control form-control-sm bio-input" disabled></div>
             <div class="col-12 col-md-6"><label class="bio-label">Penghasilan Ayah</label><input type="text" name="penghasilan_ayah" value="{{ old('penghasilan_ayah', $biodata->penghasilan_ayah) }}" class="form-control form-control-sm bio-input" disabled></div>
           </div>
-          <hr>
+          <hr style="border-color:#e8d9a0">
           <div class="row g-3">
             <div class="col-12 col-md-6"><label class="bio-label">NIK Ibu</label><input type="text" name="nik_ibu" value="{{ old('nik_ibu', $biodata->nik_ibu) }}" class="form-control form-control-sm bio-input" disabled></div>
             <div class="col-12 col-md-6"><label class="bio-label">Nama Ibu Kandung <span class="req">*</span></label><input type="text" name="nama_ibu" value="{{ old('nama_ibu', $biodata->nama_ibu) }}" class="form-control form-control-sm bio-input" disabled></div>
@@ -129,7 +132,6 @@
           </div>
         </div>
 
-        {{-- TAB 3 --}}
         <div class="tab-pane fade" id="tab-khusus" role="tabpanel">
           @php $opts=['Tidak Ada Kebutuhan Khusus','Tuna Netra','Tuna Rungu','Tuna Wicara','Tuna Daksa','Lainnya']; @endphp
           <div class="mb-3 pb-2" style="border-bottom:1px solid #ddd">
@@ -153,7 +155,6 @@
         </div>
       </div>
 
-      {{-- Akun login: username + password --}}
       <div class="card mt-2 mb-2" style="border:1.5px solid #e8d9a0;border-radius:12px;overflow:hidden">
         <div class="px-3 py-2 fw-bold" style="background:linear-gradient(135deg,#0a3d1f,#1d7a3d);color:#f4e2a0;font-size:13px"><i class="bi bi-key-fill"></i> Akun Login</div>
         <div class="p-3 row g-3">
@@ -165,8 +166,8 @@
       </div>
 
       <div class="d-none gap-2 mt-3" id="saveBar">
-        <button type="submit" class="btn fw-bold" style="background:#0a3d1f;color:#d4af37;border-radius:8px;min-height:46px;flex:1"><i class="bi bi-check-circle-fill"></i> Simpan Biodata</button>
-        <button type="button" id="btnCancel" class="btn fw-bold" style="background:#fff;border:1.5px solid #e8d9a0;color:#5d4037;border-radius:8px;min-height:46px">Batal</button>
+        <button type="submit" class="btn fw-bold" style="background:#0a3d1f;color:#d4af37;border-radius:10px;min-height:46px;flex:1"><i class="bi bi-check-circle-fill"></i> Simpan Biodata</button>
+        <button type="button" id="btnCancel" class="btn fw-bold" style="background:#fff;border:1.5px solid #e8d9a0;color:#5d4037;border-radius:10px;min-height:46px">Batal</button>
       </div>
       <div class="small mt-2" style="color:#999;font-size:11px">Ubah nama di sini → nama di dashboard, sidebar &amp; profil ikut terganti otomatis (tersimpan di akun).</div>
     </form>
@@ -184,7 +185,7 @@
     document.querySelectorAll('.bio-input').forEach(function(el){ el.disabled=!on; });
     bar.classList.toggle('d-none',!on); bar.classList.toggle('d-flex',on);
     fotoRow.classList.toggle('d-none',!on);
-    btn.innerHTML=on?'<i class="bi bi-x-lg"></i> Batal':'<i class="bi bi-pencil-square"></i> Edit Biodata';
+    btn.innerHTML=on?'<i class="bi bi-x-lg"></i> Batal':'<i class="bi bi-pencil-square"></i> Edit';
   }
   btn.onclick=function(){ setEdit(!editing); };
   cancel.onclick=function(){ setEdit(false); document.getElementById('bioForm').reset(); };

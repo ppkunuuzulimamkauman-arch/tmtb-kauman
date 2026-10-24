@@ -23,30 +23,45 @@
 @php
   $gt = $p->gt;
   $b = $gt->biodata ?? null;
-  $foto = ($b->foto_path ?? null) ? asset('storage/' . $b->foto_path) : 'https://ui-avatars.com/api/?name=' . urlencode($gt->name ?? 'GT') . '&background=d4af37&color=0a3d1f&size=160';
+  $foto = ($b->foto_path ?? null) ? asset('storage/' . $b->foto_path) : 'https://ui-avatars.com/api/?name=' . urlencode($gt->name ?? 'GT') . '&background=d4af37&color=0a3d1f&size=200';
   $cid = 'bio-' . $p->id;
 @endphp
-<div class="rounded-3 overflow-hidden" style="border:2px solid var(--gold);background:#fff">
-    <div class="d-flex align-items-center gap-3 p-3">
-        <img src="{{ $foto }}" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);flex-shrink:0">
-        <div class="flex-fill" style="min-width:0">
-            <div class="fw-bold text-truncate" style="color:#0a3d1f">{{ $gt->name ?? '-' }}</div>
-            <div class="small text-muted text-truncate">{{ $p->permohonan->nama_madrasah ?? '-' }} • {{ $p->updated_at?->format('d/m/Y') }}</div>
+<div class="rounded-3 overflow-hidden mb-3" style="border:2px solid var(--gold);background:#fff;box-shadow:0 4px 16px rgba(10,61,31,.08)">
+    <div style="height:80px;background:linear-gradient(135deg,#0a3d1f,#1d7a3d);position:relative">
+        <div style="position:absolute;bottom:-28px;left:16px">
+            <img src="{{ $foto }}" alt="" style="width:64px;height:64px;border-radius:16px;object-fit:cover;border:3px solid var(--gold);box-shadow:0 4px 12px rgba(0,0,0,.15)">
         </div>
-        <button class="btn btn-sm fw-bold flex-shrink-0" data-bs-toggle="collapse" data-bs-target="#{{ $cid }}" aria-expanded="false" aria-controls="{{ $cid }}" style="background:var(--green);color:var(--gold);border-radius:20px;padding:6px 14px"><i class="bi bi-eye-fill"></i> Lihat</button>
     </div>
-    <div class="collapse" id="{{ $cid }}">
-        <div class="mx-3 mb-3 p-3 rounded-3 small" style="background:#fdf6e3;border:1px solid #e8d9a0;color:#5d4037;line-height:2">
-            <div class="d-flex justify-content-between"><span>Tempat / Tgl Lahir</span><strong style="color:var(--green)">{{ $b->tempat_lahir ?? '-' }} / {{ $b?->tanggal_lahir ? $b->tanggal_lahir->locale('id')->isoFormat('D MMM YYYY') : '-' }}</strong></div>
-            <div class="d-flex justify-content-between"><span>NIK / NISN</span><strong style="color:var(--green)">{{ $b->nik ?? '-' }} / {{ $b->nisn ?? '-' }}</strong></div>
-            <div class="d-flex justify-content-between"><span>Jenis Kelamin / Agama</span><strong style="color:var(--green)">{{ $b->jenis_kelamin ?? '-' }} / {{ $b->agama ?? '-' }}</strong></div>
-            <div class="d-flex justify-content-between"><span>Telepon / HP</span><strong style="color:var(--green)">{{ $b->telepon ?? '-' }} / {{ $b->hp ?? '-' }}</strong></div>
-            <div><span>Alamat</span><br><strong style="color:var(--green)">{{ $b->alamat ?? '-' }}</strong></div>
-            @if($p->catatan)<div class="mt-1"><span>Catatan Admin:</span><br><strong style="color:var(--green)">{{ $p->catatan }}</strong></div>@endif
+    <div class="p-3 pt-4">
+        <div class="d-flex align-items-start gap-3">
+            <div class="flex-fill" style="min-width:0">
+                <div class="fw-bold" style="color:#0a3d1f;font-size:16px">{{ $gt->name ?? '-' }}</div>
+                <div class="small" style="color:#8a7a3a">{{ $p->permohonan->nama_madrasah ?? '-' }}</div>
+                <div class="small mt-1"><span class="badge" style="background:var(--cream);color:var(--green);border:1px solid var(--gold)">{{ $p->updated_at?->locale('id')->isoFormat('D MMM YYYY') ?? '-' }}</span></div>
+            </div>
+            <button class="btn btn-sm flex-shrink-0" data-bs-toggle="collapse" data-bs-target="#{{ $cid }}" aria-expanded="false" aria-controls="{{ $cid }}" style="background:var(--green);color:var(--gold);border-radius:10px;padding:8px 16px;font-weight:700"><i class="bi bi-person-vcard"></i> Lihat Profil</button>
+        </div>
+        <div class="collapse mt-3" id="{{ $cid }}">
+            <div class="p-3 rounded-3" style="background:linear-gradient(135deg,#fdf6e3,#fffdf0);border:1.5px solid #e8d9a0">
+                <div class="row g-2 small">
+                    <div class="col-6"><div class="bio-label">Tempat / Tgl Lahir</div><div class="fw-bold" style="color:#0a3d1f">{{ $b->tempat_lahir ?? '-' }} / {{ $b?->tanggal_lahir ? $b->tanggal_lahir->locale('id')->isoFormat('D MMM YYYY') : '-' }}</div></div>
+                    <div class="col-6"><div class="bio-label">NIK / NISN</div><div class="fw-bold" style="color:#0a3d1f">{{ $b->nik ?? '-' }} / {{ $b->nisn ?? '-' }}</div></div>
+                    <div class="col-6"><div class="bio-label">Jenis Kelamin</div><div class="fw-bold" style="color:#0a3d1f">{{ $b->jenis_kelamin ?? '-' }}</div></div>
+                    <div class="col-6"><div class="bio-label">Agama</div><div class="fw-bold" style="color:#0a3d1f">{{ $b->agama ?? '-' }}</div></div>
+                    <div class="col-6"><div class="bio-label">Telepon</div><div class="fw-bold" style="color:#0a3d1f">{{ $b->telepon ?? '-' }}</div></div>
+                    <div class="col-6"><div class="bio-label">HP / WA</div><div class="fw-bold" style="color:#0a3d1f">{{ $b->hp ?? '-' }}</div></div>
+                    <div class="col-12"><div class="bio-label">Alamat</div><div class="fw-bold" style="color:#0a3d1f">{{ $b->alamat ?? '-' }}</div></div>
+                    @if($p->catatan)
+                    <div class="col-12 mt-2 pt-2" style="border-top:1px solid #e8d9a0">
+                        <div class="bio-label">Catatan Admin</div>
+                        <div class="fw-bold" style="color:#0a3d1f">{{ $p->catatan }}</div>
+                    </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>
-@endforeach
 </div>
 <div class="mt-3">{{ $items->links() }}</div>
 @endif

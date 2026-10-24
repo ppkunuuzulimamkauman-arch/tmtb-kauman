@@ -82,8 +82,11 @@
         .sidebar-overlay{position:fixed;inset:0;background:rgba(10,61,31,0.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:1045;opacity:0;pointer-events:none;transition:opacity .32s}
         .sidebar-overlay.show{opacity:1;pointer-events:auto}
         /* Bottom Nav — mobile only */
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:1046;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border-top:2.5px solid var(--gold);display:none;grid-template-columns:repeat(5,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px rgba(10,61,31,0.14)}
-        .bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 2px;border-radius:12px;text-decoration:none;color:var(--brown);font-size:10px;font-weight:700;transition:.16s;min-height:48px;position:relative}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:1046;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border-top:2.5px solid var(--gold);display:none;padding:6px 4px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px rgba(10,61,31,0.14)}
+        .bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 8px;border-radius:12px;text-decoration:none;color:var(--brown);font-size:10px;font-weight:700;transition:.16s;min-height:48px;position:relative}
+        .bottom-nav:has(> :nth-child(3)){grid-template-columns:repeat(3,1fr)}
+        .bottom-nav:has(> :nth-child(4)){grid-template-columns:repeat(4,1fr)}
+        .bottom-nav:has(> :nth-child(5)){grid-template-columns:repeat(5,1fr)}
         .bottom-nav a i{font-size:20px;line-height:1;transition:.16s}
         .bottom-nav a.active{background:var(--green);color:var(--gold);border:1.5px solid var(--gold);box-shadow:0 4px 14px rgba(10,61,31,0.18)}
         .bottom-nav a.active i{color:var(--gold)}
@@ -330,11 +333,11 @@
 <div id="toastWrap" class="toast-wrap"></div>
 <!-- Bottom Nav — Mobile Masterpiece -->
 <nav class="bottom-nav" aria-label="Navigasi bawah">
+    @if((auth()->user()->role ?? '') === 'pjgt')
     <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard*') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('dashboard*') ? 'bi-house-door-fill' : 'bi-house-door' }}"></i>
         <span>Home</span>
     </a>
-    @if((auth()->user()->role ?? '') === 'pjgt')
     <a href="{{ route('permohonan.step1') }}" class="{{ request()->routeIs('permohonan.step*') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('permohonan.step*') ? 'bi-feather' : 'bi-pencil-square' }}"></i>
         <span>Form</span>
