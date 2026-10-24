@@ -339,13 +339,13 @@
         <i class="bi {{ request()->routeIs('permohonan.step*') ? 'bi-feather' : 'bi-pencil-square' }}"></i>
         <span>Form</span>
     </a>
-    <a href="{{ route('permohonan.lama') }}" class="{{ request()->routeIs('permohonan.lama','permohonan.show','permohonan.edit') ? 'active':'' }}">
-        <i class="bi {{ request()->routeIs('permohonan.lama','permohonan.show','permohonan.edit') ? 'bi-collection-fill' : 'bi-collection' }}"></i>
-        <span>Pengajuan</span>
+    <a href="{{ route('pengaduan.index') }}" class="{{ request()->routeIs('pengaduan.*') ? 'active':'' }}">
+        <i class="bi {{ request()->routeIs('pengaduan.*') ? 'bi-chat-left-dots-fill' : 'bi-chat-left-dots' }}"></i>
+        <span>Pengaduan</span>
     </a>
-    <a href="{{ route('landing') }}">
-        <i class="bi bi-globe2"></i>
-        <span>Beranda</span>
+    <a href="{{ route('pjgt.biodata') }}" class="{{ request()->routeIs('pjgt.biodata') ? 'active':'' }}">
+        <i class="bi {{ request()->routeIs('pjgt.biodata') ? 'bi-person-badge-fill' : 'bi-person-badge' }}"></i>
+        <span>Profil</span>
     </a>
     @elseif((auth()->user()->role ?? '') === 'gt')
     <a href="{{ route('gt.biodata') }}" class="{{ request()->routeIs('gt.biodata') ? 'active':'' }}">

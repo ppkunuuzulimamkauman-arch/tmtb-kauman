@@ -21,53 +21,7 @@
         <h4 class="fw-bold mb-0" style="color:#fff;font-size:clamp(16px,4.5vw,22px)"><i class="bi bi-collection-fill" style="color:#d4af37"></i> {{ $judulArsip }}</h4>
         <div class="small" style="color:#fdf6e3;opacity:0.8">Daftar permohonan TMTB yang telah tercatat</div>
     </div>
-    <div class="text-end d-none d-md-block">
-        <div class="badge-pendaftaran" style="background:#fdf6e3;color:#0a3d1f">Filter Data</div>
-    </div>
 </div>
-@endif
-
-@if(($via ?? '')!=='ijin')
-<form method="GET" class="card-form mb-3" style="border:2px solid #d4af37;overflow:hidden">
-    <div class="p-3 d-flex gap-2 align-items-end flex-wrap" style="background:linear-gradient(135deg,#fdf6e3 0%, #fdf0c7 100%);">
-        <div style="flex:1;min-width:160px">
-            <label class="small fw-bold" style="color:#0a3d1f"><i class="bi bi-search" style="color:#d4af37"></i> Cari</label>
-            <input type="text" name="search" value="{{ $search }}" placeholder="ID / Nama PJGT / Madrasah..." class="form-control form-control-sm" style="border:1.5px solid #d4af37;background:#fff;min-height:40px;font-size:14px">
-        </div>
-        <div style="min-width:110px;flex:1">
-            <label class="small fw-bold" style="color:#0a3d1f">Rapot</label>
-            <select name="rapot" class="form-select form-select-sm" style="border:1.5px solid #d4af37;min-height:40px">
-                <option value="">-- semua --</option>
-                <option value="A" {{ $rapot=='A'?'selected':'' }}>A</option>
-                <option value="B" {{ $rapot=='B'?'selected':'' }}>B</option>
-                <option value="C" {{ $rapot=='C'?'selected':'' }}>C</option>
-            </select>
-        </div>
-        <div style="min-width:130px;flex:1">
-            <label class="small fw-bold" style="color:#0a3d1f">Status</label>
-            <select name="status" class="form-select form-select-sm" style="border:1.5px solid #d4af37;min-height:40px">
-                <option value="">-- semua --</option>
-                <option value="Diterima" {{ $status=='Diterima'?'selected':'' }}>Diterima</option>
-                <option value="Ditolak" {{ $status=='Ditolak'?'selected':'' }}>Ditolak</option>
-                <option value="Proses" {{ $status=='Proses'?'selected':'' }}>Proses</option>
-            </select>
-        </div>
-        <div class="d-flex gap-2 w-100 w-md-auto" style="flex-wrap:wrap">
-            <button class="btn btn-sm flex-fill" style="background:#0a3d1f;color:#d4af37;border:1.5px solid #d4af37;font-weight:700;min-height:40px;border-radius:10px"><i class="bi bi-funnel"></i> Filter</button>
-            <a href="{{ route('permohonan.lama') }}" class="btn btn-sm" style="background:#fff;border:1.5px solid #d4af37;color:#0a3d1f;min-height:40px;border-radius:10px">Reset</a>
-            <a href="{{ route('permohonan.export', ['search'=>$search,'rapot'=>$rapot,'status'=>$status]) }}" class="btn btn-sm flex-fill" style="background:#0a3d1f;color:#d4af37;border:1.5px solid #d4af37;font-weight:700;min-height:40px;border-radius:10px"><i class="bi bi-file-excel"></i> Export</a>
-        </div>
-    </div>
-    @if($search || $rapot || $status)
-    <div class="px-3 py-2 small d-flex gap-2 flex-wrap align-items-center" style="background:#fff;border-top:1.5px solid #e8d9a0;color:#5d4037">
-        <span class="fw-bold" style="color:#0a3d1f">Filter aktif:</span>
-        @if($search)<span class="badge" style="background:#fdf6e3;color:#0a3d1f;border:1px solid #d4af37">cari: {{ $search }}</span>@endif
-        @if($rapot)<span class="badge" style="background:#0a3d1f;color:#d4af37">rapot: {{ $rapot }}</span>@endif
-        @if($status)<span class="badge" style="background:{{$status=='Diterima'?'#198754':($status=='Proses'?'#d4af37':'#dc3545')}};color:#fff">{{ $status }}</span>@endif
-        <span class="ms-auto small" style="color:#b8941f">• {{ $permohonans->total() }} data</span>
-    </div>
-    @endif
-</form>
 @endif
 
 <div class="card-form" style="border:2px solid #d4af37">
