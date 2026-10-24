@@ -48,32 +48,16 @@
   @endforeach
 </div>
 
+@if(auth()->user()->role !== 'pjgt')
 <div class="card-form mb-3">
   <form method="GET" action="{{ route('pengaduan.index') }}" class="p-3">
     <div class="row g-2">
-      <div class="col-6 col-md-2">
-        <label class="form-label">Status</label>
-        <select name="status" class="form-select">
-          <option value="">Semua</option>
-          @foreach(\App\Models\Pengaduan::STATUS as $s)
-          <option value="{{ $s }}" @selected($status == $s)>{{ $s }}</option>
-          @endforeach
-        </select>
-      </div>
-      <div class="col-6 col-md-2">
-        <label class="form-label">Sumber</label>
-        <select name="sumber" class="form-select">
-          <option value="">Semua</option>
-          <option value="gt" @selected(($sumber ?? '') == 'gt')>Dari GT</option>
-          <option value="pjgt" @selected(($sumber ?? '') == 'pjgt')>Dari PJGT</option>
-        </select>
-      </div>
-      <div class="col-12 col-md-5">
+      <div class="col-12 col-md-9">
         <label class="form-label">Cari</label>
         <input name="search" value="{{ $search }}" class="form-control" placeholder="Judul / madrasah / terlapor / kategori...">
       </div>
       <div class="col-12 col-md-3 d-flex align-items-end gap-1">
-        <button class="btn-green flex-fill" style="min-height:44px"><i class="bi bi-search"></i> Filter</button>
+        <button class="btn-green flex-fill" style="min-height:44px"><i class="bi bi-search"></i> Cari</button>
         <a href="{{ route('pengaduan.index') }}" class="btn btn-sm" style="background:#fff;border:1.5px solid var(--gold);color:var(--green);border-radius:10px;min-height:44px;display:flex;align-items:center">Reset</a>
       </div>
       <div class="col-12 d-flex gap-2 flex-wrap">
@@ -82,6 +66,7 @@
     </div>
   </form>
 </div>
+@endif
 
 <div class="card-form" style="border:2px solid #d4af37">
   <div class="card-form-header d-flex justify-content-between"><span><i class="bi bi-table" style="color:#d4af37"></i> Daftar Pengaduan ({{ $pengaduans->total() }})</span><span class="small" style="color:#8a7a3a">Hal {{ $pengaduans->currentPage() }}/{{ $pengaduans->lastPage() }}</span></div>
