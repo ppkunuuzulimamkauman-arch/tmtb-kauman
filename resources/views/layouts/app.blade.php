@@ -291,8 +291,6 @@
             <a href="{{ route('pjgt.biodata') }}" class="small text-decoration-none d-none d-md-inline" style="color:var(--green);font-weight:700"><i class="bi bi-person-vcard"></i> Profil</a>
             @elseif((auth()->user()->role ?? '') === 'gt')
             <a href="{{ route('gt.biodata') }}" class="small text-decoration-none d-none d-md-inline" style="color:var(--green);font-weight:700"><i class="bi bi-person-badge"></i> Profil</a>
-            @else
-            <a href="{{ route('landing') }}" class="small text-decoration-none d-none d-md-inline" style="color:var(--green);font-weight:700"><i class="bi bi-house"></i> Beranda</a>
             @endif
             <div class="dropdown d-flex align-items-center gap-2">
                 <a href="#" data-bs-toggle="dropdown" class="d-flex align-items-center gap-2 text-decoration-none" style="min-height:40px">
@@ -306,8 +304,6 @@
                     <li><a class="dropdown-item small" href="{{ route('pjgt.biodata') }}" style="color:var(--green)"><i class="bi bi-person-vcard"></i> Profil Saya</a></li>
                     @elseif((auth()->user()->role ?? '') === 'gt')
                     <li><a class="dropdown-item small" href="{{ route('gt.biodata') }}" style="color:var(--green)"><i class="bi bi-person-badge"></i> Profil Saya</a></li>
-                    @else
-                    <li><a class="dropdown-item small" href="{{ route('landing') }}" style="color:var(--green)"><i class="bi bi-house"></i> Beranda Landing</a></li>
                     @endif
                     <li><a class="dropdown-item small" href="{{ route('password.edit') }}" style="color:var(--green)"><i class="bi bi-key"></i> Ganti Password</a></li>
                     <li><form method="POST" action="{{ route('logout') }}">@csrf<button class="dropdown-item small" style="color:#dc3545"><i class="bi bi-box-arrow-right"></i> Keluar</button></form></li>
@@ -333,21 +329,19 @@
 
 <div id="toastWrap" class="toast-wrap"></div>
 <!-- Bottom Nav — Mobile Masterpiece -->
-<nav class="bottom-nav" aria-label="Navigasi bawah" style="@if((auth()->user()->role ?? '')==='pjgt')grid-template-columns:repeat(4,1fr);@else grid-template-columns:repeat(3,1fr);@endif">
+<nav class="bottom-nav" aria-label="Navigasi bawah">
     <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard*') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('dashboard*') ? 'bi-house-door-fill' : 'bi-house-door' }}"></i>
         <span>Home</span>
     </a>
-    @if(in_array(auth()->user()->role ?? '', ['admin','pjgt']))
-    @if((auth()->user()->role ?? '')==='pjgt')
+    @if((auth()->user()->role ?? '') === 'pjgt')
     <a href="{{ route('permohonan.step1') }}" class="{{ request()->routeIs('permohonan.step*') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('permohonan.step*') ? 'bi-feather' : 'bi-pencil-square' }}"></i>
         <span>Form</span>
     </a>
-    @endif
     <a href="{{ route('permohonan.lama') }}" class="{{ request()->routeIs('permohonan.lama','permohonan.show','permohonan.edit') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('permohonan.lama','permohonan.show','permohonan.edit') ? 'bi-collection-fill' : 'bi-collection' }}"></i>
-        <span>{{ (auth()->user()->role ?? '')==='pjgt' ? 'Pengajuan' : 'Arsip' }}</span>
+        <span>Pengajuan</span>
     </a>
     <a href="{{ route('landing') }}">
         <i class="bi bi-globe2"></i>
@@ -361,6 +355,15 @@
     <a href="{{ route('gt.absensi.mengajar') }}" class="{{ request()->routeIs('gt.absensi.*') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('gt.absensi.*') ? 'bi-fingerprint' : 'bi-fingerprint' }}"></i>
         <span>Absensi</span>
+    </a>
+    @else
+    <a href="{{ route('permohonan.lama') }}" class="{{ request()->routeIs('permohonan.lama','permohonan.show','permohonan.edit') ? 'active':'' }}">
+        <i class="bi {{ request()->routeIs('permohonan.lama','permohonan.show','permohonan.edit') ? 'bi-collection-fill' : 'bi-collection' }}"></i>
+        <span>Arsip</span>
+    </a>
+    <a href="{{ route('laporan') }}" class="{{ request()->routeIs('laporan') ? 'active':'' }}">
+        <i class="bi {{ request()->routeIs('laporan') ? 'bi-megaphone-fill' : 'bi-megaphone' }}"></i>
+        <span>Laporan</span>
     </a>
     @endif
 </nav>
