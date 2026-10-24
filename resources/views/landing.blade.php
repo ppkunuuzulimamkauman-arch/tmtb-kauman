@@ -118,7 +118,7 @@ section[id]:target{animation:sectFlash 1.4s ease}
   .stat-heritage .h4{font-size:20px}
   .feature-heritage{padding:16px}
   #statistik{padding-top:16px !important;margin-top:0 !important}
-  #informasi{padding-top:28px !important;padding-bottom:28px !important}
+  
   #alur{padding-top:28px !important;padding-bottom:calc(28px + 76px) !important}
   .mobile-sticky-cta{display:flex;gap:10px}
   .footer-heritage{padding-bottom:calc(18px + env(safe-area-inset-bottom)) !important;margin-bottom:0 !important}
@@ -148,8 +148,6 @@ section[id]:target{animation:sectFlash 1.4s ease}
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" id="nav">
     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 pt-3 pt-lg-0">
-      <li class="nav-item"><a class="nav-link fw-semibold" href="#statistik" style="color:var(--green)"><i class="bi bi-bar-chart d-lg-none me-2" style="color:var(--gold2)"></i>Statistik</a></li>
-      <li class="nav-item"><a class="nav-link fw-semibold" href="#informasi" style="color:var(--green)"><i class="bi bi-info-circle d-lg-none me-2" style="color:var(--gold2)"></i>Informasi</a></li>
       <li class="nav-item"><a class="nav-link fw-semibold" href="#alur" style="color:var(--green)"><i class="bi bi-signpost-2 d-lg-none me-2" style="color:var(--gold2)"></i>Alur</a></li>
       @auth
         <li class="nav-item ms-lg-2 mt-2 mt-lg-0"><a href="{{ route('dashboard') }}" class="btn-heritage w-100 w-lg-auto justify-content-center"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
@@ -379,8 +377,7 @@ section[id]:target{animation:sectFlash 1.4s ease}
     <div class="small" style="color:var(--cream);opacity:0.9">Jln KH Zainul Arifin No.165, Kauman, Bondowoso - Jawa Timur 68213<br>Pendaftaran TMTB • Resmi • Terverifikasi • © 1448 H</div>
   </div>
   <div class="col-md-5 text-md-end small" style="color:var(--cream);opacity:0.8">
-    <a class="footer-link" href="#informasi"><i class="bi bi-chevron-right"></i> Informasi</a>
-    <a class="footer-link ms-3" href="#alur"><i class="bi bi-chevron-right"></i> Alur</a>
+    <a class="footer-link" href="#alur"><i class="bi bi-chevron-right"></i> Alur</a>
     <a class="footer-link ms-3" href="#statistik"><i class="bi bi-chevron-right"></i> Statistik</a><br>
     <span class="d-none d-md-inline">Pondok Pesantren • Madrasah Diniyah • Majelis Taklim</span>
   </div>
@@ -478,9 +475,9 @@ const revealObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealObs.unobserve(e.target); } });
 },{threshold:.15, rootMargin:'0px 0px -40px 0px'});
 revealEls.forEach(el=> revealObs.observe(el));
-// ── NAVBAR SCROLL SPY ──
-const sections=['statistik','informasi','alur']; const navLinks=document.querySelectorAll('.navbar-nav .nav-link[href^="#"]');
-window.addEventListener('scroll', ()=>{
+// ── NAVBAR SCROLL SPY ───
+const sections=['statistik','alur']; const navLinks=document.querySelectorAll('.navbar-nav .nav-link[href^="#"]');
+window.addEventListener('scroll',()=>{
   // pilih seksi yang posisi atasnya paling dekat DI BAWAH posisi scroll (urutan DOM bebas)
   let current='', bestTop=-Infinity;
   sections.forEach(id=>{
