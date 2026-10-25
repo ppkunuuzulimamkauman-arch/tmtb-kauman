@@ -360,6 +360,10 @@
         <span>Absensi</span>
     </a>
     @else
+    <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard*') ? 'active':'' }}">
+        <i class="bi {{ request()->routeIs('dashboard*') ? 'bi-house-door-fill' : 'bi-house-door' }}"></i>
+        <span>Home</span>
+    </a>
     <a href="{{ route('permohonan.lama') }}" class="{{ request()->routeIs('permohonan.lama','permohonan.show','permohonan.edit') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('permohonan.lama','permohonan.show','permohonan.edit') ? 'bi-collection-fill' : 'bi-collection' }}"></i>
         <span>Arsip</span>
@@ -367,6 +371,10 @@
     <a href="{{ route('laporan') }}" class="{{ request()->routeIs('laporan') ? 'active':'' }}">
         <i class="bi {{ request()->routeIs('laporan') ? 'bi-megaphone-fill' : 'bi-megaphone' }}"></i>
         <span>Laporan</span>
+    </a>
+    <a href="{{ route('setting.index') }}" class="{{ request()->routeIs('setting*') ? 'active':'' }}">
+        <i class="bi {{ request()->routeIs('setting*') ? 'bi-person-gear-fill' : 'bi-person-gear' }}"></i>
+        <span>Profil</span>
     </a>
     @endif
 </nav>

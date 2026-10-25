@@ -48,7 +48,7 @@
   @endforeach
 </div>
 
-@if(auth()->user()->role !== 'pjgt')
+@if(auth()->user()->role !== 'pjgt' && auth()->user()->role !== 'gt')
 <div class="card-form mb-3">
   <form method="GET" action="{{ route('pengaduan.index') }}" class="p-3">
     <div class="row g-2">
