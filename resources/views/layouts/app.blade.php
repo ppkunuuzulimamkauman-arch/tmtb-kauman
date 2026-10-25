@@ -372,8 +372,8 @@
         <i class="bi {{ request()->routeIs('laporan') ? 'bi-megaphone-fill' : 'bi-megaphone' }}"></i>
         <span>Laporan</span>
     </a>
-    <a href="{{ route('setting.index') }}" class="{{ request()->routeIs('setting*') ? 'active':'' }}">
-        <i class="bi {{ request()->routeIs('setting*') ? 'bi-person-gear-fill' : 'bi-person-gear' }}"></i>
+    <a href="{{ route('users.index') }}" class="{{ request()->routeIs('users*') ? 'active':'' }}">
+        <i class="bi {{ request()->routeIs('users*') ? 'bi-person-gear-fill' : 'bi-person-gear' }}"></i>
         <span>Profil</span>
     </a>
     @endif
